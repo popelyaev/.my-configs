@@ -9,9 +9,16 @@ cmd + alt - b      : open -a "FireFox"
 cmd + alt - v      : open -a "VmVApp"
 cmd + alt - t      : open -a "Telegram"
 
-cmd + alt - 1 : open -a "FireFox" "https://docs.google.com/spreadsheets/u/0/"
-cmd + alt - x : open -a "FireFox" "https://sheets.new"
-cmd + alt - z : open -a "FireFox" "https://github.com/dashboard"
+cmd + alt - 1 : open "https://docs.google.com/spreadsheets/u/0/"
+cmd + alt - x : open "https://sheets.new"
+cmd + alt - z : open "https://github.com/dashboard"
+
+# cmd + alt - d : sh -c 'current=$(yabai -m query --windows --window | jq -r ".app"); 
+# if [ "$current" = "Firefox" ]; then
+#     yabai -m window --focus $(yabai -m query --windows | jq ".[] | select(.app==\"Alacritty\") | .id")
+# else
+#     yabai -m window --focus $(yabai -m query --windows | jq ".[] | select(.app==\"Firefox\") | .id")
+# fi'
 
 # cmd + alt - 0 : open -na "Firefox" --args -private-window "https://rt.pornhub.com/" -fullscreen
 # cmd + alt - 9 : open -na "Firefox" --args -private-window "https://rt.pornhub.com/model/princess_lili/videos" -fullscreen
@@ -47,8 +54,14 @@ shift + alt - y : yabai -m space --mirror y-axis
 shift + alt - x : yabai -m space --mirror x-axis
 
 # toggle window float
-shift + alt - t : yabai -m window --toggle float --grid 100:100:10:15:80:70
+shift + alt - t : yabai -m window --toggle float --grid 100:100:0:0:100:100
+shift + alt - q : yabai -m window --toggle float --grid 100:100:15:15:70:70
+shift + alt - z : yabai -m window --toggle float --grid 100:100:30:0:40:100
 
+alt - b : \
+open -a "Firefox"; sleep 0.5; \
+yabai -m window --move abs:0:0; \
+yabai -m window --resize abs:300:720
 
 # -- Modifying Window Size --
 
