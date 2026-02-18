@@ -10,6 +10,12 @@
       },
       {
         "language": [
+          "css", "scss", "sass"
+        ],
+        "path": "./css.json"
+      },
+      {
+        "language": [
           "html", "php"
         ],
         "path": "./elements.json"

@@ -27,6 +27,7 @@ return {
 					"ts_ls",
 					"emmet_language_server",
 					"cssls",
+					"somesass_ls",
 					"html",
 					"jsonls",
 					"powershell_es",
@@ -55,7 +56,7 @@ return {
                 filetypes = { "html", "php" },
             },
             emmet_language_server = {
-                filetypes = { "html", "php" },
+                filetypes = { "html", "php", "somesass_ls" },
             },
         }
 
