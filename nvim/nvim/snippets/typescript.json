@@ -1,0 +1,30 @@
+{
+    "jsx/tsx шаблон": {
+        "prefix": "tsinit",
+        "body": [
+            "const $1 = () => {",
+            "    return (",
+            "       <div>$1</div>",
+            "    )",
+            "}",
+            "",
+            "export default $1"
+        ],
+        "discription": "-"
+    },
+        "condole.log()": {
+        "prefix": "cl",
+        "body": [
+            "console.log($1)"
+        ],
+        "discription": ""
+    },
+    "condole.log(\"\")": {
+        "prefix": "cls",
+        "body": [
+            "console.log(`$1`)"
+        ],
+        "discription": ""
+    }
+
+}

@@ -1,12 +1,11 @@
 return {
-
 	{
 		"L3MON4D3/LuaSnip",
-		dependencies = { "rafamadriz/friendly-snippets" }, -- Готовые сниппеты (опционально)
+		-- dependencies = { "rafamadriz/friendly-snippets" }, -- Готовые сниппеты (опционально)
 		config = function()
 			require("luasnip.loaders.from_vscode").lazy_load({
 				paths = { vim.fn.stdpath("config") .. "/snippets" },
-			}) -- Подключает сниппеты VS Code
+			})
 		end,
 	},
 	{
@@ -29,9 +28,6 @@ return {
 					end,
 				},
 				mapping = cmp.mapping.preset.insert({
-					-- ["<Tab>"] = cmp.mapping.select_next_item(), -- Переключение по автодополнению
-					-- ["<S-Tab>"] = cmp.mapping.select_prev_item(),
-					-- ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Выбрать вариант
 					["<Tab>"] = cmp.mapping(function(fallback)
 						local luasnip = require("luasnip")
 						if cmp.visible() then

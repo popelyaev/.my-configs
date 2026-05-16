@@ -37,6 +37,12 @@
           "html"
         ],
         "path": "./technikal.json"
+      },
+      {
+        "language": [
+          "typescript", "javascriptreact", "typescriptreact"
+        ],
+        "path": "./typescript.json"
       }
     ]
   }
