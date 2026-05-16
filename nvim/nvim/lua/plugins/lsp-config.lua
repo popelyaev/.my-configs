@@ -13,7 +13,6 @@ return {
 			})
 		end,
 	},
-
 	{
 		"williamboman/mason-lspconfig.nvim",
 		opts = {
@@ -44,141 +43,16 @@ return {
 
 			local servers = {
 				lua_ls = {},
+				ts_ls = {},
+				emmet_language_server = {},
+				cssls = {},
+				somesass_ls = {},
+				html = {},
+				jsonls = {},
 				powershell_es = {},
 				intelephense = {},
-				tailwindcss = {
-
-					filetypes = {
-
-						"html",
-
-						"css",
-
-						"scss",
-
-						"javascript",
-
-						"javascriptreact",
-
-						"typescript",
-
-						"typescriptreact",
-
-						"vue",
-
-						"svelte",
-
-						"php",
-					},
-
-					init_options = {
-
-						userLanguages = {
-
-							eelixir = "html-eex",
-
-							eruby = "erb",
-
-							templ = "html",
-						},
-					},
-
-					settings = {
-
-						tailwindCSS = {
-
-							experimental = {
-
-								classRegex = {
-
-									'class:\\s*"([^"]*)"',
-
-									'className:\\s*"([^"]*)"',
-
-									"tw`([^`]*)",
-
-									'tw="([^"]*)',
-
-									"tw={'([^'}]*)",
-								},
-							},
-						},
-					},
-				},
-
-				ts_ls = {
-					init_options = {
-						preferences = {
-							includeCompletionsForImportStatements = true,
-							includeCompletionsWithInsertText = true,
-						},
-					},
-
-					settings = {
-						typescript = {
-							suggest = {
-								autoImports = true,
-							},
-
-							inlayHints = {
-								includeInlayParameterNameHints = "all",
-							},
-						},
-
-						javascript = {
-							suggest = {
-								autoImports = true,
-							},
-
-							inlayHints = {
-								includeInlayParameterNameHints = "all",
-							},
-						},
-					},
-				},
-
-				eslint = {
-					on_attach = function(client, bufnr)
-						vim.api.nvim_create_autocmd("BufWritePre", {
-							buffer = bufnr,
-							callback = function()
-								vim.lsp.buf.code_action({
-									context = { only = { "source.fixAll.eslint" } },
-									apply = true,
-								})
-							end,
-						})
-					end,
-				},
-
-				cssls = {},
-				jsonls = {},
-
-				html = {
-					filetypes = {
-						"html",
-						"php",
-						"javascriptreact",
-						"typescriptreact",
-					},
-				},
-
-				emmet_language_server = {
-					filetypes = {
-						"html",
-						"php",
-						"css",
-						"javascriptreact",
-						"typescriptreact",
-					},
-
-					init_options = {
-						languages = {
-							javascriptreact = "html",
-							typescriptreact = "html",
-						},
-					},
-				},
+				basedpyright = {},
+				tailwindcss = {},
 			}
 
 			for name, config in pairs(servers) do

@@ -52,12 +52,16 @@ return {
 
 					["<CR>"] = cmp.mapping.confirm({ select = true }),
 				}),
+
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" }, -- Источник LSP
 					{ name = "buffer" }, -- Подсказки из текущего файла
 					{ name = "path" }, -- Пути к файлам
 					{ name = "luasnip" }, -- Snippets
 				}),
+				formatting = {
+					format = require("nvim-highlight-colors").format,
+				},
 			})
 		end,
 	},

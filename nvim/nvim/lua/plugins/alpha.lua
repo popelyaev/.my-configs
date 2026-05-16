@@ -32,10 +32,11 @@ return {
 
 		-- Set menu
 		dashboard.section.buttons.val = {
+            dashboard.button("e", " Folders", ":Neotree toggle <CR>"),
 			dashboard.button("n", " New file", ":ene <BAR> startinsert <CR>"),
-			dashboard.button("e", "  Open tree", ":Neotree toggle <CR>"),
-			dashboard.button("r", "  Recent", ":Telescope oldfiles <CR>"),
-			dashboard.button("l", "  Lazy", ":Lazy <CR>"),
+			dashboard.button("r", " Recent", ":Telescope oldfiles <CR>"),
+			dashboard.button("l", " Lazy", ":Lazy <CR>"),
+			dashboard.button("c", " CheckHealth", ":checkhealth <CR>"),
 			dashboard.button("q", "󰠚 Quit NVIM", ":qa<CR>"),
 		}
 		--
