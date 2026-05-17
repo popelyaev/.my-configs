@@ -15,21 +15,5 @@ return {
 				return { "indent" } -- Использует LSP и отступы
 			end,
 		})
-
-		-- Горячие клавиши
-		vim.keymap.set("n", "zR", ufo.openAllFolds) -- Развернуть все
-		vim.keymap.set("n", "zM", ufo.closeAllFolds) -- Свернуть все
-		vim.keymap.set("n", "z0", function()
-			ufo.closeFoldsWith(0)
-		end) -- Уровень 1
-		vim.keymap.set("n", "z1", function()
-			ufo.closeFoldsWith(1)
-		end) -- Уровень 1
-		vim.keymap.set("n", "z2", function()
-			ufo.closeFoldsWith(2)
-		end) -- Уровень 2
-		vim.keymap.set("n", "z3", function()
-			ufo.closeFoldsWith(3)
-		end) -- Уровень 3
 	end,
 }

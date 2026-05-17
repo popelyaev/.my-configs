@@ -1,6 +1,5 @@
-local M = {}
 -- Функция удаления внешнего тега (unwrap)
-function M.unwrap_html()
+function unwrap_html()
   -- Получаем позиции визуального выделения
   local start_pos = vim.fn.getpos("'<")
   local end_pos   = vim.fn.getpos("'>")
@@ -42,5 +41,5 @@ function M.unwrap_html()
   vim.api.nvim_win_set_cursor(0, {start_line, 0})
 end
 
-return M
+vim.api.nvim_create_user_command("UnwrapTag", unwrap_html, { range = true })
 

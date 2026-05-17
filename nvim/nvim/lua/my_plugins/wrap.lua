@@ -1,6 +1,5 @@
-local M = {}
 -- Функция обертывания выделенного HTML-блока с реальным таб-отступом
-function M.wrap_html()
+function wrap_html()
   local input_tag = vim.fn.input("Enter tag (например div.wrapper, div#id, div#id.wrapper): ")
   if input_tag == "" then return end
 
@@ -64,4 +63,5 @@ function M.wrap_html()
   vim.api.nvim_win_set_cursor(0, {start_line, 0})
 end
 
-return M
+vim.api.nvim_create_user_command("WrapTag", wrap_html, { range = true })
+

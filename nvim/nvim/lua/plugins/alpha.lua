@@ -36,6 +36,7 @@ return {
 			dashboard.button("n", " New file", ":ene <BAR> startinsert <CR>"),
 			dashboard.button("r", " Recent", ":Telescope oldfiles <CR>"),
 			dashboard.button("l", " Lazy", ":Lazy <CR>"),
+			dashboard.button("m", " Mason", ":Mason <CR>"),
 			dashboard.button("c", " CheckHealth", ":checkhealth <CR>"),
 			dashboard.button("q", "󰠚 Quit NVIM", ":qa<CR>"),
 		}

@@ -3,65 +3,62 @@ vim.g.mapleader = " "
 
 require("config.options")
 require("config.lazy")
-require("config.keymaps")
 
+require("my_plugins.wrap")
+require("my_plugins.unwrap")
+
+require("config.keymaps")
 
 vim.cmd("colorscheme catppuccin-mocha")
 
-vim.keymap.set("n", "<leader>u", ":colorscheme onedark <CR>", {})
-
-
--- vim.cmd("HighlightNone")
-
-
-local ts = vim.treesitter
-
-local function extract_classes_ids()
-	local bufnr = vim.api.nvim_get_current_buf()
-
-	if vim.bo.filetype ~= "html" then
-		vim.notify("Not an HTML file", vim.log.levels.ERROR)
-		return
-	end
-
-	local parser = ts.get_parser(bufnr, "html")
-	local tree = parser:parse()[1]
-	local root = tree:root()
-
-	local query = ts.query.parse(
-		"html",
-		[[
-	   (attribute
-	     (attribute_name) @name
-	     (quoted_attribute_value (attribute_value) @value))
-	 ]]
-	)
-
-	local classes, ids = {}, {}
-
-	for id, node in query:iter_captures(root, bufnr, 0, -1) do
-		local capture = query.captures[id]
-		local text = ts.get_node_text(node, bufnr)
-
-		if capture == "name" then
-			last_name = text
-		elseif capture == "value" and last_name then
-			text = text:gsub('"', "")
-
-			if last_name == "class" then
-				for cls in text:gmatch("%S+") do
-					classes[cls] = true
-				end
-			elseif last_name == "id" then
-				ids[text] = true
-			end
-
-			last_name = nil
-		end
-	end
-
-	return classes, ids
-end
+-- local ts = vim.treesitter
+--
+-- local function extract_classes_ids()
+-- 	local bufnr = vim.api.nvim_get_current_buf()
+--
+-- 	if vim.bo.filetype ~= "html" then
+-- 		vim.notify("Not an HTML file", vim.log.levels.ERROR)
+-- 		return
+-- 	end
+--
+-- 	local parser = ts.get_parser(bufnr, "html")
+-- 	local tree = parser:parse()[1]
+-- 	local root = tree:root()
+--
+-- 	local query = ts.query.parse(
+-- 		"html",
+-- 		[[
+-- 	   (attribute
+-- 	     (attribute_name) @name
+-- 	     (quoted_attribute_value (attribute_value) @value))
+-- 	 ]]
+-- 	)
+--
+-- 	local classes, ids = {}, {}
+--
+-- 	for id, node in query:iter_captures(root, bufnr, 0, -1) do
+-- 		local capture = query.captures[id]
+-- 		local text = ts.get_node_text(node, bufnr)
+--
+-- 		if capture == "name" then
+-- 			last_name = text
+-- 		elseif capture == "value" and last_name then
+-- 			text = text:gsub('"', "")
+--
+-- 			if last_name == "class" then
+-- 				for cls in text:gmatch("%S+") do
+-- 					classes[cls] = true
+-- 				end
+-- 			elseif last_name == "id" then
+-- 				ids[text] = true
+-- 			end
+--
+-- 			last_name = nil
+-- 		end
+-- 	end
+--
+-- 	return classes, ids
+-- end
 
 local function generate_scss()
 	local classes, ids = extract_classes_ids()
@@ -160,17 +157,11 @@ local function generate_bem_scss()
 	vim.notify("BEM SCSS copied to clipboard", vim.log.levels.INFO)
 end
 
-local wrap = require("myplugins.wrap")
-local unwrap = require("myplugins.unwrap")
 
 vim.api.nvim_create_user_command("ExtractScss", generate_scss, {})
 vim.api.nvim_create_user_command("ExtractBemScss", generate_bem_scss, {})
 
-vim.api.nvim_create_user_command("WrapTag", wrap.wrap_html, { range = true })
-vim.api.nvim_create_user_command("UnwrapTag", unwrap.unwrap_html, { range = true })
 
-vim.keymap.set("v", "<leader>w", ":WrapTag<CR>", { noremap = true, silent = true })
-vim.keymap.set("v", "<leader>u", ":UnwrapTag<CR>", { noremap = true, silent = true })
 
 vim.keymap.set("n", "<leader>cc", ":ExtractScss<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>cb", ":ExtractBemScss<CR>", { noremap = true, silent = true })

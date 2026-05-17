@@ -3,19 +3,45 @@ local f = require("functions.functions")
 vim.keymap.set("n", "<leader>gf", function()
 	require("conform").format({ async = true })
 end)
--- Вызов explore
-vim.keymap.set("n", "<leader>E", ":Explore <CR>", {})
 
+-- Обернуть в HTML тег
+vim.keymap.set("v", "<leader>w", ":WrapTag<CR>", { noremap = true, silent = true })
+vim.keymap.set("v", "<leader>u", ":UnwrapTag<CR>", { noremap = true, silent = true })
+
+vim.keymap.set("n", "<leader>E", ":Explore <CR>", {}) -- Вызов explore
 vim.keymap.set("n", "<leader>e", ":Neotree toggle <CR>", {})
-
+vim.keymap.set("n", "<leader>L", ":Lazy <CR>", {})
+vim.keymap.set("n", "<leader>M", ":Mason <CR>", {})
 vim.keymap.set("n", "<leader>a", ":Alpha<CR>", {})
-
 vim.keymap.set("n", "<leader>dd", ":%bd|e#|bd# <CR>", {})
 
 -- изменяет пенеос строк если они выходят за пределы nvim
 vim.keymap.set("n", "<leader>tw", ":set wrap! linebreak!<CR>", { noremap = true, silent = true })
-
 vim.keymap.set("n", "<leader>as", f.toggleAutoSave, { noremap = true, silent = true })
+
+-- Tmux навигация и переключение между окнами
+vim.keymap.set("n", "<C-h>", require("nvim-tmux-navigation").NvimTmuxNavigateLeft)
+vim.keymap.set("n", "<C-j>", require("nvim-tmux-navigation").NvimTmuxNavigateDown)
+vim.keymap.set("n", "<C-k>", require("nvim-tmux-navigation").NvimTmuxNavigateUp)
+vim.keymap.set("n", "<C-l>", require("nvim-tmux-navigation").NvimTmuxNavigateRight)
+vim.keymap.set("n", "<C-\\>", require("nvim-tmux-navigation").NvimTmuxNavigateLastActive)
+vim.keymap.set("n", "<C-Space>", require("nvim-tmux-navigation").NvimTmuxNavigateNext)
+
+-- сворачивает элементы
+vim.keymap.set("n", "zr", require("ufo").openAllFolds) -- Развернуть все
+vim.keymap.set("n", "za", require("ufo").closeAllFolds) -- Свернуть все
+vim.keymap.set("n", "z0", function()
+	require("ufo").closeFoldsWith(0)
+end) -- Уровень 1
+vim.keymap.set("n", "z1", function()
+	require("ufo").closeFoldsWith(1)
+end) -- Уровень 1
+vim.keymap.set("n", "z2", function()
+	require("ufo").closeFoldsWith(2)
+end) -- Уровень 2
+vim.keymap.set("n", "z3", function()
+	require("ufo").closeFoldsWith(3)
+end) -- Уровень 3
 
 -- telescope открыть окно с последними файлами
 vim.keymap.set("n", "<leader>fr", require("telescope.builtin").oldfiles)
